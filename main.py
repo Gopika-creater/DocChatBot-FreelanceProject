@@ -91,7 +91,7 @@ if __name__ == "__main__":
     init_llm()
 
     # ✅ Change this to your PDF path
-    process_document("C:/Users/Admin/Downloads/realistic_insurance_leads.pdf")
+    process_document("sample.pdf")
 
     # Ask questions in a loop
     print("\n📄 Document loaded! Ask your questions (type 'quit' to exit)\n")
