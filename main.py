@@ -9,8 +9,8 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import Chroma
-from langchain.chains.combine_documents import create_stuff_documents_chain  # type: ignore
-from langchain.chains import create_retrieval_chain  # type: ignore
+from langchain.chains.combine_documents import create_stuff_documents_chain  
+from langchain.chains import create_retrieval_chain  
 from langchain_core.prompts import ChatPromptTemplate
 
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
@@ -29,7 +29,7 @@ def init_llm():
 
     logger.info("Loading embeddings...")
     embeddings = HuggingFaceEmbeddings(
-     model_name="./model_cache/minilm",  # ✅ local path, no download needed
+     model_name="./model_cache/minilm",  
     model_kwargs={"device": DEVICE},
     )
     logger.info("LLM + Embeddings ready")
@@ -52,11 +52,11 @@ def process_document(pdf_path):
     vectorstore = Chroma.from_documents(
         documents=splits,
         embedding=embeddings,
-        persist_directory="./chroma_db"  # ✅ saves locally
+        persist_directory="./chroma_db"  
     )
 
     retriever = vectorstore.as_retriever(
-        search_kwargs={"k": 4}  # retrieve top 4 chunks
+        search_kwargs={"k": 4}  
     )
 
     prompt = ChatPromptTemplate.from_template("""
@@ -90,10 +90,10 @@ def ask_question(query):
 if __name__ == "__main__":
     init_llm()
 
-    # ✅ Change this to your PDF path
+    
     process_document("sample.pdf")
 
-    # Ask questions in a loop
+    
     print("\n📄 Document loaded! Ask your questions (type 'quit' to exit)\n")
     while True:
         question = input("You: ")
